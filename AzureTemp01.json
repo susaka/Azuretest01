@@ -146,7 +146,7 @@
         }
       },
       {
-        "name": "[variables('nic1')]",
+        "name": "[concat(variables('nic1'),copyIndex())]",
         "type": "Microsoft.Network/networkInterfaces",
         "apiVersion": "2020-05-01",
         "location": "[parameters('location')]",
