@@ -156,6 +156,10 @@
           "[variables('networkSecurityGroupName')]",
           "[variables('virtualNetworkName')]"
         ],
+        "copy": {
+          "name": "VMLoop",
+          "count": "[parameters('NumberOfMachines')]"
+        },
         "properties": {
           "ipConfigurations": [
             {
@@ -178,6 +182,10 @@
       },
       {
         "name": "[concat(variables('publicIpAddressName'),copyIndex())]",
+        "copy": {
+          "name": "VMLoop",
+          "count": "[parameters('NumberOfMachines')]"
+        },
         "type": "Microsoft.Network/publicIPAddresses",
         "apiVersion": "2020-05-01",
         "location": "[parameters('location')]",
