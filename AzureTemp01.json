@@ -61,7 +61,7 @@
       {
         "type": "Microsoft.Compute/virtualMachines",
         "apiVersion": "2019-07-01",
-        "name": "[concat('Task6VM', copyIndex())]",
+        "name": "[concat(variables('virtualMachineName'),copyIndex())]",
         "copy": {
           "name": "VMLoop",
           "count": "[parameters('NumberOfMachines')]"
