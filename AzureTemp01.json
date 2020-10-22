@@ -41,7 +41,7 @@
       },
       "NumberOfMachines": {
         "type": "int",
-        "defaultValue": "1",
+        "defaultValue": 1,
         "metadata": {
           "description": "Create more VM's at once"
         }
