@@ -59,8 +59,13 @@
     },
     "resources": [
       {
-        "name": "[concat('Task6VM', copyIndex())]",
         "type": "Microsoft.Compute/virtualMachines",
+        "apiVersion": "2019-07-01",
+        "name": "[concat('Task6VM', copyIndex())]",
+        "copy": {
+          "name": "VMLoop",
+          "count": "[parameters('NumberOfMachines')]"
+        },
         "location": "[parameters('location')]",
         "comments": "This is the virtual machine that you're building.",
         "dependsOn": [
@@ -73,7 +78,7 @@
             "adminUsername": "[parameters('adminUsername')]",
             "adminPassword": "[parameters('adminPassword')]",
             "windowsConfiguration": {
-              "provisionVmAgent": "true"
+              "provisionVMAgent": true
             }
           },
           "hardwareProfile": {
@@ -147,7 +152,7 @@
         "location": "[parameters('location')]",
         "comments": "This will be your Primary NIC",
         "dependsOn": [
-          "[concat (variables('publicIpAddressName',copyIndex())]",
+          "[concat (variables('publicIpAddressName'),copyIndex())]",
           "[variables('networkSecurityGroupName')]",
           "[variables('virtualNetworkName')]"
         ],
@@ -161,7 +166,7 @@
                 },
                 "privateIPAllocationMethod": "Dynamic",
                 "publicIpAddress": {
-                  "id": "[resourceId('Microsoft.Network/publicIpAddresses', concat (variables('publicIpAddressName',copyIndex()))]"
+                  "id": "[resourceId('Microsoft.Network/publicIpAddresses', concat(variables('publicIpAddressName'),copyIndex()))]"
                 }
               }
             }
@@ -172,7 +177,7 @@
         }
       },
       {
-        "name": "[concat (variables('publicIpAddressName',copyIndex())]",
+        "name": "[concat(variables('publicIpAddressName'),copyIndex())]",
         "type": "Microsoft.Network/publicIPAddresses",
         "apiVersion": "2020-05-01",
         "location": "[parameters('location')]",
